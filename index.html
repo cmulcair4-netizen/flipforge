@@ -1,0 +1,492 @@
+<!doctype html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>FlipForge Pro</title>
+<style>
+:root{--bg:#f4f6fa;--ink:#101828;--muted:#667085;--line:#e4e7ec;--card:#fff;--navy:#07111f;--blue:#2563eb;--green:#16a34a;--amber:#d97706;--red:#dc2626}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+.hero{background:linear-gradient(135deg,#07111f,#172554 62%,#075985);color:#fff;padding:24px 18px 28px}.wrap{max-width:1240px;margin:auto;padding:0 18px}
+.top{display:flex;justify-content:space-between;gap:20px}.brand{font-size:34px;font-weight:850;letter-spacing:-1.5px}.sub{color:#cbd5e1;margin-top:3px}.live{border:1px solid #ffffff30;background:#ffffff12;border-radius:99px;padding:8px 11px;font-size:12px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:20px}.stat{background:#ffffff0d;border:1px solid #ffffff1c;border-radius:13px;padding:13px}.stat b{display:block;font-size:23px}.stat span{font-size:11px;color:#cbd5e1}
+.progress{height:7px;background:#ffffff20;border-radius:9px;margin-top:8px;overflow:hidden}.bar{height:100%;width:10%;background:#7dd3fc}
+nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}.nav{display:flex;gap:6px;overflow:auto;padding:8px 0}.tab{border:0;background:transparent;padding:9px 12px;border-radius:8px;font-weight:750;cursor:pointer;white-space:nowrap}.tab.active{background:#111827;color:#fff}
+main{padding:20px 0 60px}.hidden{display:none!important}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 15px}input,select,button{font:inherit}input,select{padding:10px;border:1px solid #d0d5dd;border-radius:9px;background:#fff}.search{flex:1;min-width:240px}.btn{border:0;border-radius:9px;padding:9px 12px;background:#111827;color:#fff;font-weight:700;cursor:pointer;text-decoration:none}.light{background:#eef2f6;color:#111827}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(295px,1fr));gap:13px}.card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:15px;box-shadow:0 4px 15px #1018280a}.deal{position:relative}.score{position:absolute;right:13px;top:13px;background:#dcfce7;color:#166534;border-radius:99px;padding:5px 8px;font-weight:800;font-size:12px}.deal h3{margin:0 75px 5px 0;font-size:17px}.meta,.note{font-size:12px;color:var(--muted)}.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:13px 0}.num{background:#f8fafc;border-radius:9px;padding:9px}.num b{display:block;font-size:17px}.num span{font-size:10px;color:var(--muted)}.why{font-size:13px;line-height:1.5;color:#344054;min-height:75px}.actions{display:flex;gap:7px;margin-top:11px}
+.verdict{padding:12px;border-radius:10px;font-weight:800}.buy{background:#dcfce7;color:#166534}.pass{background:#fee2e2;color:#991b1b}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:13px;overflow:hidden}th,td{padding:10px;border-bottom:1px solid #edf0f4;text-align:left;font-size:13px}th{background:#f8fafc}.kpi{font-size:29px;font-weight:850}.green{color:var(--green)}.red{color:var(--red)}
+@media(max-width:800px){.stats{grid-template-columns:1fr 1fr}.top{display:block}.live{display:inline-block;margin-top:12px}}
+</style>
+<style id="flipforge-v7-soft">
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+:root{
+ --ff-bg:#f7f5fb;--ff-card:#fff;--ff-ink:#303044;--ff-muted:#7f8195;
+ --ff-lilac:#9b8cff;--ff-mint:#72d8b1;--ff-peach:#ffb98f;--ff-pink:#f39acb;
+ --ff-shadow:0 12px 35px rgba(62,55,90,.10);
+}
+body{font-family:'Nunito',system-ui,sans-serif!important;background:linear-gradient(180deg,#faf9fd,#f3f1f8)!important;color:var(--ff-ink)!important}
+.ff-v6-shell{font-family:'Nunito',system-ui,sans-serif!important}
+.ff-v6-hero{background:linear-gradient(135deg,#eeeaff,#e9f8f2)!important;border:0!important;box-shadow:var(--ff-shadow)!important;border-radius:28px!important}
+.ff-v6-kicker{color:#776bd0!important;font-weight:900!important}
+.ff-v6-title{color:#37364a!important;font-weight:900!important;letter-spacing:-.045em!important}
+.ff-v6-sub,.ff-v6-card p{color:var(--ff-muted)!important}
+.ff-v6-card{background:rgba(255,255,255,.90)!important;border:0!important;box-shadow:var(--ff-shadow)!important;border-radius:24px!important}
+.ff-v6-card h3{color:#414052!important;font-weight:900!important}
+.ff-v6-btn{background:linear-gradient(135deg,#9d91ff,#8175e9)!important;color:white!important;border:0!important;box-shadow:0 7px 18px rgba(129,117,233,.18)!important}
+.ff-v6-btn.alt{background:#f1eff9!important;color:#625b87!important;border:0!important}
+.ff-v6-drop{border:2px dashed #d7d2e8!important;color:var(--ff-muted)!important;background:#fbfaff}
+.ff-v6-fields input,.ff-v6-fields textarea,.ff-v6-fields select{background:#faf9fd!important;color:var(--ff-ink)!important;border:1px solid #e7e3ef!important}
+.ff-v6-pill{background:#f2f0fa!important;color:#656178!important}
+.ff-v6-output{background:#edf9f4!important;border:1px solid #d2eee2!important;color:#43564f}
+.ff-v7-gamebar{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+.ff-v7-stat{background:rgba(255,255,255,.72);border-radius:15px;padding:9px 12px;font-size:12px;color:#68687a}
+.ff-v7-stat b{color:#39384a;font-size:15px}
+.ff-v7-deal{margin-top:14px;padding:15px;border-radius:19px;background:linear-gradient(135deg,#fff,#f5f3ff);box-shadow:0 7px 22px rgba(62,55,90,.07)}
+.ff-v7-deal .hot{color:#6d60d5;font-weight:900}
+@media(max-width:760px){.ff-v6-title{font-size:40px!important}}
+</style>
+
+<style id="ff-ultimate-css">
+.ffu{max-width:1120px;margin:0 auto;padding:0 12px 40px;font-family:'Nunito',system-ui,sans-serif}
+.ffu-hero{position:relative;overflow:hidden;margin:18px 0;padding:24px;border-radius:32px;background:linear-gradient(135deg,#eee9ff 0%,#e8f8f1 55%,#fff0e7 100%);box-shadow:0 18px 55px rgba(70,60,100,.12)}
+.ffu-hero:after{content:"";position:absolute;width:180px;height:180px;right:-55px;top:-65px;border-radius:50%;background:rgba(255,255,255,.38)}
+.ffu-k{font-size:11px;font-weight:900;letter-spacing:.17em;text-transform:uppercase;color:#7064c8}
+.ffu-title{font-size:clamp(34px,8vw,62px);line-height:.95;letter-spacing:-.055em;font-weight:900;margin:7px 0;color:#37354a}
+.ffu-sub{max-width:720px;color:#74758b;line-height:1.5}
+.ffu-level{display:flex;align-items:center;gap:10px;margin-top:17px}
+.ffu-xp{height:9px;flex:1;max-width:450px;background:rgba(255,255,255,.65);border-radius:99px;overflow:hidden}
+.ffu-xp i{display:block;width:10%;height:100%;background:linear-gradient(90deg,#9c8cff,#72d8b1);border-radius:99px}
+.ffu-grid{display:grid;grid-template-columns:1.4fr .8fr;gap:14px}
+.ffu-card{background:rgba(255,255,255,.92);border-radius:24px;padding:18px;box-shadow:0 12px 34px rgba(60,55,90,.08)}
+.ffu-card h3{margin:0 0 5px;color:#3e3c50;font-size:19px}
+.ffu-muted{color:#85869a;font-size:13px;line-height:1.45}
+.ffu-hot{display:grid;gap:10px;margin-top:12px}
+.ffu-deal{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:14px;border-radius:19px;background:linear-gradient(135deg,#fff,#f7f5ff);border:1px solid #eeeaf7}
+.ffu-deal strong{color:#37354a}
+.ffu-badge{display:inline-flex;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:900;background:#e8f7f0;color:#4a8c72}
+.ffu-profit{font-size:20px;font-weight:900;color:#4eaa7e}
+.ffu-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+.ffu-btn{border:0;border-radius:14px;padding:11px 14px;font:inherit;font-weight:900;cursor:pointer;background:#8e82ed;color:#fff}
+.ffu-btn.alt{background:#f0eef8;color:#655f81}
+.ffu-btn.mint{background:#dff5eb;color:#4f8c74}
+.ffu-input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #e6e2ef;border-radius:13px;background:#fbfafd;color:#3e3c50;margin-top:6px;font:inherit}
+.ffu-label{font-size:12px;color:#85869a}
+.ffu-intake{display:grid;grid-template-columns:1fr 110px 140px;gap:9px}
+.ffu-status{margin-top:10px;padding:11px;border-radius:14px;background:#f5f3fb;color:#68677d;font-size:12px}
+.ffu-radar{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.ffu-switch{position:relative;width:52px;height:30px}
+.ffu-switch input{display:none}.ffu-switch span{position:absolute;inset:0;border-radius:99px;background:#ddd9e8;cursor:pointer}.ffu-switch span:after{content:"";position:absolute;width:24px;height:24px;top:3px;left:3px;border-radius:50%;background:#fff;box-shadow:0 2px 7px #aaa;transition:.2s}.ffu-switch input:checked+span{background:#72d8b1}.ffu-switch input:checked+span:after{transform:translateX(22px)}
+.ffu-nav{display:flex;gap:7px;overflow:auto;padding:4px 0 12px}
+.ffu-nav button{white-space:nowrap;border:0;border-radius:999px;padding:9px 13px;background:#eeecf5;color:#68677c;font:inherit;font-weight:800}
+.ffu-nav button.active{background:#8e82ed;color:#fff}
+@media(max-width:760px){.ffu-grid{grid-template-columns:1fr}.ffu-intake{grid-template-columns:1fr 1fr}.ffu-intake label:first-child{grid-column:1/-1}.ffu-title{font-size:42px}}
+</style>
+
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#8e82ed">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="FlipForge">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
+<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}</script>
+</head><body>
+<div class="ffu" id="ffUltimate">
+  <div class="ffu-hero">
+    <div class="ffu-k">FlipForge • Ultimate</div>
+    <div class="ffu-title">Hunt smarter.<br>Stack profit.</div>
+    <div class="ffu-sub">A playful deal-hunting cockpit built around one mission: turn a small bankroll into a bigger one without losing discipline.</div>
+    <div class="ffu-level"><b>LVL 1</b><div class="ffu-xp"><i></i></div><b>€200 / €2,000</b></div>
+    <div class="ffu-actions">
+      <button class="ffu-btn" id="ffuHunt">🔎 Hunt now</button>
+      <button class="ffu-btn alt" id="ffuPaste">📋 Paste advert</button>
+      <button class="ffu-btn mint" id="ffuInstall">📱 Home screen</button>
+    </div>
+  </div>
+
+  <div class="ffu-nav">
+    <button class="active">🔥 Hunt</button><button>💬 Message</button><button>📒 My flips</button><button>🏆 Progress</button>
+  </div>
+
+  <div class="ffu-grid">
+    <main>
+      <section class="ffu-card">
+        <h3>🔥 Hot Hunt</h3>
+        <div class="ffu-muted">Only deals worth your attention. Confidence is evidence-based where possible; it is never a promise of profit.</div>
+        <div class="ffu-hot" id="ffuDeals">
+          <div class="ffu-deal"><div><span class="ffu-badge">92% CONFIDENCE</span><br><strong>DeWalt / professional tool candidate</strong><div class="ffu-muted">Cork · low entry · quick-turn category</div></div><div class="ffu-profit">+€30*</div></div>
+          <div class="ffu-deal"><div><span class="ffu-badge">86% CONFIDENCE</span><br><strong>OEM alloy / automotive candidate</strong><div class="ffu-muted">Cork · verify fitment & condition</div></div><div class="ffu-profit">+€60*</div></div>
+        </div>
+        <div class="ffu-status">*Illustrative scanner hypotheses until actual advert/comparable evidence is verified.</div>
+      </section>
+
+      <section class="ffu-card" style="margin-top:14px">
+        <h3>⚡ Zero-fuss intake</h3>
+        <div class="ffu-muted">Paste a link or the advert text. Don't fill out a form unless you need to.</div>
+        <div class="ffu-intake" style="margin-top:11px">
+          <label class="ffu-label">Advert / text<input id="ffuAd" class="ffu-input" placeholder="Paste DoneDeal / Adverts link or text"></label>
+          <label class="ffu-label">Ask €<input id="ffuPrice" class="ffu-input" inputmode="decimal" placeholder="69"></label>
+          <label class="ffu-label">Area<input id="ffuArea" class="ffu-input" placeholder="Cork"></label>
+        </div>
+        <div class="ffu-actions"><button class="ffu-btn" id="ffuAnalyse">🎯 Give me the verdict</button></div>
+        <div id="ffuResult" class="ffu-status" style="display:none"></div>
+      </section>
+    </main>
+
+    <aside>
+      <section class="ffu-card">
+        <div class="ffu-radar"><div><h3>🔔 Deal Radar</h3><div class="ffu-muted">Alert me at 80%+ confidence</div></div><label class="ffu-switch"><input id="ffuNotify" type="checkbox"><span></span></label></div>
+        <div id="ffuNotifyText" class="ffu-status">Notifications are off.</div>
+      </section>
+      <section class="ffu-card" style="margin-top:14px">
+        <h3>🧭 Profit rules</h3>
+        <div class="ffu-muted">
+          <p>💶 Protect the bankroll.</p>
+          <p>📈 Demand a real margin.</p>
+          <p>🔍 Verify before paying.</p>
+          <p>⚡ Prefer fast, easy flips.</p>
+          <p>🚫 Walk away when evidence is weak.</p>
+        </div>
+      </section>
+      <section class="ffu-card" style="margin-top:14px">
+        <h3>🏆 Next milestone</h3>
+        <div style="font-size:30px;font-weight:900;color:#6f65c9">€300</div>
+        <div class="ffu-muted">First checkpoint: +€100 bankroll growth.</div>
+      </section>
+    </aside>
+  </div>
+</div>
+
+<script>
+(function(){
+ const $=id=>document.getElementById(id);
+ if(!$("ffUltimate"))return;
+ $("ffuAnalyse").onclick=()=>{
+   const p=Number($("ffuPrice").value||0), a=$("ffuAd").value.trim(), area=$("ffuArea").value.trim();
+   let verdict="🟠 NEEDS EVIDENCE", cap=p?Math.round(p*.75):0;
+   if(p&&p<=80) verdict="🟢 HOT CANDIDATE";
+   if(p>180) verdict="🟠 BIGGER RISK — VERIFY HARD";
+   $("ffuResult").style.display="block";
+   $("ffuResult").innerHTML=`<b>${verdict}</b><br>${p?"Ask: €"+p+" · provisional max-buy discipline: €"+cap:"Add the asking price if visible."}${area?" · "+area:""}<br><span style="opacity:.75">${a?"Advert captured. Full enrichment requires the listing to be publicly searchable/accessed.":"Paste the advert/link to capture it."}</span>`;
+ };
+ $("ffuPaste").onclick=async()=>{try{$("ffuAd").value=await navigator.clipboard.readText();$("ffuAnalyse").click();}catch(e){$("ffuAd").focus()}};
+ $("ffuHunt").onclick=()=>window.scrollTo({top:$("ffUltimate").offsetTop,behavior:"smooth"});
+ $("ffuNotify").onchange=async()=>{
+   const on=$("ffuNotify").checked, t=$("ffuNotifyText");
+   if(on && "Notification" in window){
+     const perm=await Notification.requestPermission();
+     if(perm==="granted") t.textContent="Deal Radar armed ✓ — the browser may notify when a qualifying alert is generated.";
+     else { $("ffuNotify").checked=false; t.textContent="Notifications weren't permitted in this browser.";}
+   } else if(on) { $("ffuNotify").checked=false; t.textContent="This browser does not support notifications here.";}
+   else t.textContent="Notifications are off.";
+ };
+ $("ffuInstall").onclick=()=>(async()=>{
+  if(window.deferredInstallPrompt){
+    window.deferredInstallPrompt.prompt();
+    try{await window.deferredInstallPrompt.userChoice;}catch(e){}
+    window.deferredInstallPrompt=null;
+  } else {
+    alert("If Chrome offers Install app, choose it. If it only offers Add to Home screen, use that. For automatic install prompts, host this PWA over HTTPS.");
+  }
+})();
+})();
+</script>
+
+<header class="hero"><div class="wrap"><div class="top"><div><div class="brand">FlipForge PRO</div><div class="sub">€200 → €2,000 • Cork-first flipping command centre</div></div><div class="live">● LIVE MARKET SNAPSHOT</div></div>
+<div class="stats"><div class="stat"><b id="cash">€200</b><span>Bankroll</span></div><div class="stat"><b>€2,000</b><span>Target</span></div><div class="stat"><b id="left">€1,800</b><span>To target</span></div><div class="stat"><b id="pct">10%</b><span>Progress</span><div class="progress"><div class="bar"></div></div></div><div class="stat"><b id="nleads">0</b><span>Live leads loaded</span></div></div></div></header>
+<nav><div class="wrap nav"><button class="tab active" data-page="scanner">🔥 Scanner</button><button class="tab" data-page="deal">🎯 Deal Desk</button><button class="tab" data-page="ledger">📒 Ledger</button><button class="tab" data-page="strategy">🧠 Strategy</button></div></nav>
+<main class="wrap">
+
+<section id="scanner"><h2>Today's ranked leads</h2><p class="note">Fresh marketplace snapshot. Scores are for triage; verify the individual advert before paying. The scanner deliberately favours low entry risk and minimal/no work.</p>
+<div class="toolbar"><input id="q" class="search" placeholder="Search item / location / marketplace"><select id="cat"><option>All</option><option>Tools</option><option>Automotive</option></select><select id="sort"><option value="score">Best score</option><option value="profit">Profit</option><option value="roi">ROI</option><option value="buy">Lowest buy</option></select><button class="btn" onclick="render()">Re-rank</button></div>
+<div id="cards" class="grid"></div></section>
+
+<section id="deal" class="hidden"><h2>Deal Desk</h2><p class="note">Paste numbers from an advert. This gives you a maximum-buy discipline rather than encouraging impulse purchases.</p>
+<div class="card"><div class="toolbar"><input id="ask" type="number" placeholder="Seller ask €"><input id="target" type="number" placeholder="Target resale €"><input id="cost" type="number" placeholder="Travel / fees €"><input id="min" type="number" value="40" placeholder="Minimum ROI %"></div>
+<div class="grid"><div class="card"><span class="note">Profit at ask</span><div id="profit" class="kpi">€0</div></div><div class="card"><span class="note">ROI at ask</span><div id="roi" class="kpi">0%</div></div><div class="card"><span class="note">Suggested maximum buy</span><div id="maxbuy" class="kpi green">€0</div></div></div><div id="verdict" class="verdict pass">ENTER NUMBERS TO SCORE</div></div></section>
+
+<section id="ledger" class="hidden"><h2>Transaction ledger</h2><div class="card"><div class="toolbar"><input id="li" placeholder="Item"><input id="lb" type="number" placeholder="Bought €"><input id="ls" type="number" placeholder="Sold €"><button class="btn" onclick="add()">Add transaction</button></div><table><thead><tr><th>Item</th><th>Buy</th><th>Sell</th><th>Profit</th><th>ROI</th><th></th></tr></thead><tbody id="rows"></tbody></table></div></section>
+
+<section id="strategy" class="hidden"><h2>Operating playbook</h2><div class="grid">
+<div class="card"><b>€200 bankroll rule</b><p class="note">Keep at least €60–€80 liquid. Initial sweet spot: €40–€120 purchases. Increase deal size only after realised sales.</p></div>
+<div class="card"><b>40%+ target ROI</b><p class="note">Use 40% as a filter, not a guarantee. A quick €50–€70 profit can be better than a slow €150 theoretical margin.</p></div>
+<div class="card"><b>Authenticity & ownership</b><p class="note">Ask for model/serial details and proof of ownership where appropriate. Walk away from suspicious or counterfeit-looking goods.</p></div>
+<div class="card"><b>Zero-work preference</b><p class="note">Working, clean, identifiable items first. No repair projects until the bankroll is substantially larger.</p></div>
+<div class="card"><b>Negotiation</b><p class="note">Offer a specific cash/collection price and be prepared to walk away. Never reveal your expected resale margin.</p></div>
+<div class="card"><b>Compound</b><p class="note">Reinvest realised profit progressively: €200 → €300 → €450 → €700 → €1,100 → €2,000, rather than betting the entire float on one deal.</p></div>
+</div></section>
+</main>
+<script>
+const leads=[["DeWalt DCD778 brushless combi drill \u2014 bare tool", "DoneDeal", "Cork City", 69, 99, "Tools", "High", "https://www.donedeal.ie/tools?words=dewalt+combi+drill", "Strongest current lead: same model appears around \u20ac99 locally; at \u20ac69 there is a \u20ac30 gross spread before negotiation/travel. Only buy if genuinely working and complete as advertised."], ["DeWalt 18V drill + impact driver", "DoneDeal", "Midleton, Cork", 90, 160, "Tools", "Medium", "https://www.donedeal.ie/tools?words=dewalt+18v+drill", "Two-tool bundle at \u20ac90. Exact models, batteries and charger are the swing factors. Ask for model numbers before travelling."], ["Audi 17-inch alloys + tyres", "DoneDeal", "Bandon, Cork", 150, 250, "Automotive", "Medium", "https://www.donedeal.ie/alloyswheels?area=Cork", "\u20ac150 current ask. Comparable 17-inch Audi/VW wheels appear at higher asks, but exact fitment, tyre condition and wheel condition must be checked."], ["DeWalt DCD796 brushless combi drill", "DoneDeal", "Cork City", 100, 145, "Tools", "Medium", "https://www.donedeal.ie/tools?words=dewalt+dcd796", "\u20ac100 local private listing. Potentially viable, but margin is much thinner than the \u20ac69 DCD778 lead."], ["DeWalt DCD778 brushless combi drill \u2014 second listing", "DoneDeal", "Cork City", 49, 90, "Tools", "Medium", "https://www.donedeal.ie/tools?words=dewalt+dcd778", "\u20ac49 is a low-risk entry if the item is working. Verify it is not missing key components and confirm why it is priced so low."], ["Milwaukee M18 cordless combi drill \u2014 new", "DoneDeal", "Rochestown, Cork", 110, 170, "Tools", "Medium", "https://www.donedeal.ie/tools?words=milwaukee+m18+combi+drill", "New M18 listing at \u20ac110. Attractive brand, but verify exact model and whether battery/charger are included."]];
+let ledger=JSON.parse(localStorage.getItem('ffLedgerPro')||'[]');
+const euro=x=>'€'+Math.round(x);
+function score(d){let p=d[4]-d[3],r=p/d[3]*100;return Math.max(1,Math.min(99,Math.round(42+r*.45+(d[6]=='High'?12:d[6]=='Medium'?7:2)+(d[3]<=100?7:0))))}
+function render(){
+ const q=document.getElementById('q').value.toLowerCase(),cat=document.getElementById('cat').value,sort=document.getElementById('sort').value;
+ let a=leads.filter(d=>(cat=='All'||d[5]==cat)&&(!q||(d[0]+' '+d[1]+' '+d[2]).toLowerCase().includes(q)));
+ a.sort((x,y)=>sort=='profit'?(y[4]-y[3])-(x[4]-x[3]):sort=='roi'?((y[4]-y[3])/y[3])-((x[4]-x[3])/x[3]):sort=='buy'?x[3]-y[3]:score(y)-score(x));
+ document.getElementById('nleads').textContent=a.length;
+ document.getElementById('cards').innerHTML=a.map((d,i)=>{let p=d[4]-d[3],r=p/d[3]*100;return `<article class="card deal"><div class="score">#${i+1} • ${score(d)}/100</div><h3>${d[0]}</h3><div class="meta">${d[1]} • ${d[2]} • ${d[5]}</div><div class="nums"><div class="num"><b>${euro(d[3])}</b><span>ASK</span></div><div class="num"><b>${euro(d[4])}</b><span>RESALE HYPOTHESIS</span></div><div class="num"><b>${euro(p)}</b><span>GROSS SPREAD</span></div></div><div class="why">${d[8]}<br><b>ROI ${r.toFixed(0)}% • ${d[6]} confidence</b></div><div class="actions"><a class="btn" href="${d[7]}" target="_blank">Open live search</a><button class="btn light" onclick="navigator.clipboard?.writeText('${d[0]} — €${d[3]} ask')">Copy</button></div></article>`}).join('');
+}
+function calc(){
+ let a=+ask.value||0,s=+target.value||0,c=+cost.value||0,m=+min.value||40,p=s-a-c,r=a?p/a*100:0;
+ profit.textContent=euro(p);roi.textContent=r.toFixed(0)+'%';
+ let max=s-c-(s-c)*(m/100);max=Math.max(0,max);maxbuy.textContent=euro(max);
+ verdict.textContent=a&&s?(p>0&&r>=m?'BUY CANDIDATE':'PASS / NEGOTIATE'):'ENTER NUMBERS TO SCORE';
+ verdict.className='verdict '+(a&&s&&p>0&&r>=m?'buy':'pass');
+}
+function renderLedger(){rows.innerHTML=ledger.map((x,i)=>`<tr><td>${x.i}</td><td>${euro(x.b)}</td><td>${euro(x.s)}</td><td class="green">${euro(x.s-x.b)}</td><td>${(100*(x.s-x.b)/x.b).toFixed(0)}%</td><td><button onclick="ledger.splice(${i},1);save()">×</button></td></tr>`).join('')}
+function add(){let i=li.value,b=+lb.value,s=+ls.value;if(!i||!b||!s)return;ledger.push({i,b,s});li.value=lb.value=ls.value='';save()}
+function save(){localStorage.setItem('ffLedgerPro',JSON.stringify(ledger));renderLedger()}
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.querySelectorAll('main>section').forEach(x=>x.classList.add('hidden'));document.getElementById(t.dataset.page).classList.remove('hidden')});
+['q','cat','sort'].forEach(x=>document.getElementById(x).addEventListener('input',render));['ask','target','cost','min'].forEach(x=>document.getElementById(x).addEventListener('input',calc));
+render();calc();renderLedger();
+</script>
+<div style="margin:14px 0;padding:12px 15px;border-radius:14px;background:rgba(100,180,255,.08);border:1px solid rgba(100,180,255,.18);font-size:13px">
+  <strong>⚡ Hourly Scan:</strong> an automated hourly deal scan is enabled. Cork is the priority; strong Ireland-wide opportunities are also considered. The scanner uses searchable/public listings and does not assume access to closed or private marketplace data.
+</div>
+
+<section id="messageLab" class="ff-panel" style="margin:24px 0;padding:22px;border-radius:18px;border:1px solid rgba(255,255,255,.12);background:rgba(20,24,32,.72)">
+  <div style="display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap">
+    <div>
+      <div style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.65">Message Lab</div>
+      <h2 style="margin:6px 0 4px">First-touch message generator</h2>
+      <div style="opacity:.72;max-width:760px">Tailor the opening message to the item, price, location, listing details and seller signals. The goal is to sound like a real buyer, reduce friction and make a clean offer without revealing the whole resale thesis.</div>
+    </div>
+    <div style="font-size:12px;padding:8px 10px;border-radius:999px;background:rgba(100,180,255,.10)">No auto-send • review before sending</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px">
+    <label>Item / title<input id="mlItem" placeholder="e.g. DeWalt DCD778 bare tool"></label>
+    <label>Ask (€)<input id="mlAsk" type="number" placeholder="69"></label>
+    <label>Your offer (€)<input id="mlOffer" type="number" placeholder="55"></label>
+    <label>Location<input id="mlLocation" placeholder="Cork City"></label>
+    <label>Seller style<select id="mlSeller"><option>Private seller</option><option>Trader / business</option><option>Unknown</option></select></label>
+    <label>Pickup / timing<select id="mlTiming"><option>Can collect today</option><option>Can collect this evening</option><option>Can collect tomorrow</option><option>Need to arrange collection</option></select></label>
+  </div>
+
+  <label style="display:block;margin-top:12px">Known listing details<textarea id="mlDetails" rows="4" placeholder="Condition, unused/new, accessories, battery/charger included, reason for sale, listing wording, seller profile signals, etc."></textarea></label>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+    <button id="mlGenerate" type="button" class="ff-btn">Generate best first touch</button>
+    <button id="mlAlt" type="button" class="ff-btn" style="opacity:.82">Generate firmer offer</button>
+    <button id="mlCopy" type="button" class="ff-btn" style="opacity:.82">Copy message</button>
+  </div>
+
+  <div id="mlOutput" style="margin-top:16px;display:none">
+    <div style="font-size:12px;text-transform:uppercase;letter-spacing:.1em;opacity:.6;margin-bottom:7px">Suggested message</div>
+    <textarea id="mlText" rows="8" style="width:100%;box-sizing:border-box"></textarea>
+    <div id="mlReason" style="margin-top:10px;font-size:12px;opacity:.68"></div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  if (!$("mlGenerate")) return;
+
+  function clean(s){ return (s||"").trim(); }
+  function euro(n){ return n ? "€"+Number(n).toFixed(0) : ""; }
+
+  function build(firm){
+    const item = clean($("mlItem").value) || "the item";
+    const ask = Number($("mlAsk").value || 0);
+    const offer = Number($("mlOffer").value || 0);
+    const loc = clean($("mlLocation").value);
+    const seller = $("mlSeller").value;
+    const timing = $("mlTiming").value;
+    const details = clean($("mlDetails").value);
+
+    let opener = seller === "Trader / business"
+      ? `Hi, I'm interested in the ${item}.`
+      : `Hi, is the ${item} still available?`;
+    let context = details ? ` I saw the details in the ad and ${details.length > 160 ? "just wanted to check a couple of things before collecting." : "it looks like what I'm after."}` : "";
+    let price = "";
+    if (offer > 0) {
+      price = firm
+        ? ` If everything is as described, would you take ${euro(offer)} for it? I can ${timing.toLowerCase().replace("can ","")} and make it straightforward.`
+        : ` If it's as described, would you consider ${euro(offer)}? I can ${timing.toLowerCase().replace("can ","")} and keep the collection quick and easy.`;
+    } else if (ask > 0) {
+      price = ` I'm happy to make the collection straightforward${loc ? ` in ${loc}` : ""}.`;
+    }
+    const checks = /battery|charger|case|accessor/i.test(details)
+      ? ""
+      : ` Also, just confirming what's included with it (battery/charger/accessories if applicable)?`;
+    const text = `${opener}${context}${price}${checks}\n\nThanks.`;
+    $("mlText").value = text;
+    $("mlOutput").style.display = "block";
+    $("mlReason").textContent = firm
+      ? "Firmer version: clear offer + low-friction collection, without overexplaining why you're buying."
+      : "Default version: confirms availability, shows genuine interest, asks only useful questions and keeps the offer easy to accept.";
+  }
+
+  $("mlGenerate").onclick = () => build(false);
+  $("mlAlt").onclick = () => build(true);
+  $("mlCopy").onclick = async () => {
+    const t = $("mlText").value;
+    if (!t) return;
+    try { await navigator.clipboard.writeText(t); $("mlCopy").textContent="Copied ✓"; setTimeout(()=>$("mlCopy").textContent="Copy message",1200); }
+    catch(e){ $("mlText").select(); document.execCommand("copy"); }
+  };
+})();
+</script>
+
+<style id="flipforge-v6-style">
+:root{--ff-bg:#07111f;--ff-card:#0d1a2b;--ff-card2:#102139;--ff-text:#eef6ff;--ff-muted:#93a8bf;--ff-accent:#58d68d;--ff-accent2:#5aa9ff;--ff-warn:#ffd166;--ff-danger:#ff6b6b}
+body{background:radial-gradient(circle at 15% 0%,#102844 0,#07111f 42%,#050b14 100%)!important;color:var(--ff-text)!important}
+.ff-v6-shell{max-width:1100px;margin:18px auto 32px;padding:0 14px;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.ff-v6-hero{border:1px solid rgba(255,255,255,.10);border-radius:26px;padding:22px;background:linear-gradient(135deg,rgba(16,33,57,.96),rgba(8,18,31,.92));box-shadow:0 18px 55px rgba(0,0,0,.28)}
+.ff-v6-kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ff-accent);font-weight:800}
+.ff-v6-title{font-size:clamp(30px,7vw,54px);line-height:.98;margin:7px 0 10px;letter-spacing:-.04em}
+.ff-v6-sub{color:var(--ff-muted);max-width:720px;line-height:1.5}
+.ff-v6-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.ff-v6-btn{border:0;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;background:var(--ff-accent);color:#06140d;box-shadow:0 7px 18px rgba(88,214,141,.18)}
+.ff-v6-btn.alt{background:rgba(90,169,255,.13);color:#cfe6ff;border:1px solid rgba(90,169,255,.28)}
+.ff-v6-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-top:14px}
+.ff-v6-card{background:rgba(13,26,43,.9);border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:18px}
+.ff-v6-card h3{margin:0 0 6px;font-size:18px}
+.ff-v6-card p{margin:0;color:var(--ff-muted);line-height:1.45}
+.ff-v6-drop{margin-top:13px;border:1.5px dashed rgba(255,255,255,.18);border-radius:16px;padding:18px;text-align:center;color:var(--ff-muted);cursor:pointer}
+.ff-v6-drop strong{display:block;color:var(--ff-text);margin-bottom:5px}
+.ff-v6-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.ff-v6-fields label{font-size:12px;color:var(--ff-muted)}
+.ff-v6-fields input,.ff-v6-fields textarea,.ff-v6-fields select{width:100%;box-sizing:border-box;margin-top:5px;border-radius:11px;border:1px solid rgba(255,255,255,.10);background:#081523;color:var(--ff-text);padding:11px}
+.ff-v6-output{display:none;margin-top:12px;padding:14px;border-radius:14px;background:rgba(88,214,141,.07);border:1px solid rgba(88,214,141,.18)}
+.ff-v6-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.07);font-size:11px;color:#c7d5e4;margin:4px 4px 0 0}
+@media(max-width:760px){.ff-v6-grid{grid-template-columns:1fr}.ff-v6-fields{grid-template-columns:1fr}.ff-v6-hero{padding:18px}.ff-v6-shell{padding:0 10px}.ff-v6-btn{flex:1;min-width:145px}}
+</style>
+
+<div style="max-width:1120px;margin:18px auto 4px;padding:0 12px;color:#85869a;font:800 12px Nunito,system-ui;letter-spacing:.08em">ADVANCED TOOLS</div><div class="ff-v6-shell" id="ffV6">
+<div class="ff-v7-gamebar">
+  <div class="ff-v7-stat">💰 Bankroll <b>€200</b></div>
+  <div class="ff-v7-stat">🎯 Target <b>€2,000</b></div>
+  <div class="ff-v7-stat">🔥 Hot deals <b id="ffHotCount">—</b></div>
+  <div class="ff-v7-stat">📈 Progress <b>10%</b></div>
+</div>
+
+<section class="ff-v6-card" style="margin-top:14px">
+  <h3>🔔 Deal Radar</h3>
+  <p>Get alerted when a newly found deal clears the <b>80% confidence</b> threshold. The alert is for discovery only — you still review the advert before buying.</p>
+  <div class="ff-v6-actions">
+    <button class="ff-v6-btn" id="ffNotifyBtn">Enable deal notifications</button>
+    <span id="ffNotifyStatus" style="align-self:center;font-size:12px;color:#7f8195"></span>
+  </div>
+</section>
+<script>
+(function(){
+ const b=document.getElementById('ffNotifyBtn'),s=document.getElementById('ffNotifyStatus');
+ if(!b)return;
+ const supported='Notification' in window;
+ function status(){
+   if(!supported){s.textContent='Browser notifications are not supported here.';b.disabled=true;return;}
+   if(Notification.permission==='granted'){s.textContent='Notifications enabled ✓';b.textContent='Deal Radar enabled ✓';}
+   else if(Notification.permission==='denied'){s.textContent='Notifications are blocked in browser settings.';}
+ }
+ b.onclick=async()=>{
+   if(!supported)return;
+   try{await Notification.requestPermission();status();}catch(e){s.textContent='Please enable notifications in your browser settings.';}
+ };
+ status();
+ window.flipForgeAlert=function(deal){
+   const confidence=Number(deal.confidence||0);
+   if(confidence>=80 && supported && Notification.permission==='granted'){
+     new Notification('🔥 FlipForge: high-confidence deal',{body:`${deal.title||'New deal'}${deal.price?' — €'+deal.price:''}`});
+   }
+ };
+})();
+</script>
+
+  <div class="ff-v6-hero">
+    <div class="ff-v6-kicker">FlipForge • Quick Mode</div>
+    <div class="ff-v6-title">Find the deal.<br>Let the numbers happen.</div>
+    <div class="ff-v6-sub">The new front door is designed around <b>less typing</b>: paste an advert, drop in a link, or use a photo/screenshot. FlipForge keeps the detailed numbers in the background and brings you straight to the decision.</div>
+    <div class="ff-v6-actions">
+      <button class="ff-v6-btn" id="ffPasteBtn">📋 Paste advert</button>
+      <button class="ff-v6-btn alt" id="ffPhotoBtn">📷 Add screenshot</button>
+      <button class="ff-v6-btn alt" id="ffInstallBtn">📱 Add to home screen</button>
+    </div>
+  </div>
+
+  <div class="ff-v6-grid">
+    <div class="ff-v6-card">
+      <h3>🚀 One-minute Deal Intake</h3>
+      <p>Only enter what you actually know. Everything else is left for the scanner/enrichment layer.</p>
+      <div class="ff-v6-drop" id="ffDrop">
+        <strong>Paste an advert URL or its text</strong>
+        No need to fill out ten boxes.
+      </div>
+      <div class="ff-v6-fields">
+        <label>Advert / URL
+          <input id="ffUrl" placeholder="https://...">
+        </label>
+        <label>What are they asking?
+          <input id="ffAsk" inputmode="decimal" placeholder="€">
+        </label>
+        <label>Where?
+          <input id="ffLoc" placeholder="Cork">
+        </label>
+        <label>Anything obvious?
+          <input id="ffNote" placeholder="e.g. unused, includes battery">
+        </label>
+      </div>
+      <div class="ff-v6-actions">
+        <button class="ff-v6-btn" id="ffAnalyse">Analyse this advert</button>
+      </div>
+      <div class="ff-v6-output" id="ffOutput"></div>
+    </div>
+
+    <div class="ff-v6-card">
+      <h3>🎯 Your decision, simplified</h3>
+      <p>Instead of making you calculate everything, the interface should surface just four things:</p>
+      <div style="margin-top:10px">
+        <span class="ff-v6-pill">🟢 BUY</span>
+        <span class="ff-v6-pill">🟠 NEGOTIATE</span>
+        <span class="ff-v6-pill">🔴 PASS</span>
+        <span class="ff-v6-pill">💶 Max buy</span>
+        <span class="ff-v6-pill">📈 Expected profit</span>
+        <span class="ff-v6-pill">💬 Best message</span>
+      </div>
+      <div style="height:14px"></div>
+      <h3>📱 Android-friendly</h3>
+      <p>The page is designed to work like a lightweight app. Use <b>Add to home screen</b> in Chrome/your browser to create a home-screen shortcut. For a true standalone PWA, the page also needs to be hosted from HTTPS (or localhost) with a manifest/service worker.</p>
+      <div class="ff-v6-actions">
+        <button class="ff-v6-btn alt" id="ffHowInstall">How to install</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  if(!$("ffAnalyse")) return;
+  function money(v){const n=Number(String(v||"").replace(/[^0-9.]/g,""));return n?`€${n.toFixed(0)}`:"—";}
+  $("ffAnalyse").onclick=()=>{
+    const url=$("ffUrl").value.trim(), ask=Number($("ffAsk").value)||0, loc=$("ffLoc").value.trim(), note=$("ffNote").value.trim();
+    let verdict="🟠 NEEDS A LOOK", max=ask?ask*.78:0, msg="Paste the advert text or URL and verify the listing/comparables before buying.";
+    if(ask && ask<=80){verdict="🟢 CANDIDATE";max=Math.round(ask*.78);msg="Low entry price. Verify condition, completeness and Irish comparables before making the offer.";}
+    if(ask && ask>180){verdict="🟠 NEGOTIATE";max=Math.round(ask*.68);msg="Higher cash exposure. Only proceed if the resale evidence is strong.";}
+    $("ffOutput").style.display="block";
+    $("ffOutput").innerHTML=`<b>${verdict}</b><div style="margin-top:8px">Ask: <b>${money(ask)}</b> · Suggested discipline cap: <b>${money(max)}</b>${loc?` · ${loc}`:""}</div><div style="margin-top:7px;color:#a9bed2">${note?`Advert note: ${note}. `:""}${msg}</div>${url?`<div style="margin-top:7px;font-size:12px;word-break:break-all">${url}</div>`:""}`;
+  };
+  $("ffPasteBtn").onclick=async()=>{
+    try{
+      const t=await navigator.clipboard.readText();
+      if(t){$("ffUrl").value=t; $("ffAnalyse").click();}
+      else $("ffUrl").focus();
+    }catch(e){$("ffUrl").focus();}
+  };
+  $("ffDrop").onclick=()=>$("ffUrl").focus();
+  $("ffPhotoBtn").onclick=()=>{
+    const i=document.createElement("input");i.type="file";i.accept="image/*";i.click();
+    i.onchange=()=>{if(i.files[0]){ $("ffNote").value=( $("ffNote").value+" Screenshot attached: "+i.files[0].name).trim(); $("ffNote").focus(); }};
+  };
+  $("ffHowInstall").onclick=()=>alert("Android/Chrome: open this page in Chrome → tap ⋮ → Add to Home screen (or Install app if offered) → Add. If the browser only offers a shortcut, choose Add to Home screen.");
+  $("ffInstallBtn").onclick=()=>$("ffHowInstall").click();
+})();
+</script>
+
+<script>
+window.deferredInstallPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.deferredInstallPrompt=e;});
+</script>
+</body></html>
